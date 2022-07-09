@@ -8,21 +8,48 @@ class kategoriView extends StatefulWidget {
 }
 
 class _kategoriViewState extends State<kategoriView> {
+  int selectedIndexSolTaraf=0;
   int degisken=0;
+  int index=-1;
+  int index2=-1;
   List<String> solkategorilerlistesi = [
     "Sana özel",
     "Popüler",
     "Telefon",
     "Beyaz eşya",
-    "Elektrikli ev aleti",
+    "Ev aleti",
     "Moda",
     "Spor",
     "Anne-bebek",
     "Süpermarket",
     "Petshop",
   ];
+  List<String> sagkategorilerlistesiUst = [
+    "Çizgi Roman",
+    "Araştırma",
+    "Hobi",
+    "Dijital yayınlar",
+    "Dergi",
+    "Din ve mitoloji",
+    "Termoslar",
+    "Bellek",
+    "Saklama",
+    "PC",
+    "Sağlık ürünleri",
+    "Şarj cihazları",
+    "Kılıflar",
+    "Mouse",
+    "Giyim ve ekipman",
+    "Elektrikli alet",
+    "Manuel alet",
+    "Kuru gıda",
+    "Oyuncu koltuğu",
+    "Baharat",
+    "Kupalar",
+  ];
   @override
   Widget build(BuildContext context) {
+    sifirla();
     return SafeArea(
       child: Scaffold(
         body: bodyMethod(),
@@ -80,28 +107,10 @@ class _kategoriViewState extends State<kategoriView> {
   Expanded AltKutu() {
     return Expanded(
         child: Container(
-          color: Colors.amber,
           child: Row(
             children: [
-              SizedBox(
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  child: Column(
-                    children: [
-                      solkolondegiskenarttirilmis(),
-                      solkolondegiskenarttirilmis(),
-                      solkolondegiskenarttirilmis(),
-                      solkolondegiskenarttirilmis(),
-                      solkolondegiskenarttirilmis(),                    
-                      solkolondegiskenarttirilmis(),
-                      solkolondegiskenarttirilmis(),
-                      solkolondegiskenarttirilmis(),
-                      solkolondegiskenarttirilmis(),
-                      solkolondegiskenarttirilmis(),
-                    ],
-                  ),
-                ),
-              )
+              SoldakiAsagiKaydirilanSecenek(),
+              SagdakiAsagiKaydirilanSecenek(),
             ],
           ),
           width: double.infinity,
@@ -109,18 +118,165 @@ class _kategoriViewState extends State<kategoriView> {
       );
   }
 
-  Card solkolondegiskenarttirilmis() {
-    degisken++;
-    return kategoriCardSolKolon(degisken);
+  Expanded SagdakiAsagiKaydirilanSecenek() {
+    return Expanded(child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    seninIcinSectik(),
+                    GridMetodu(),
+                    EnCokBakilanlar(),
+                    GridMetodu(),
+                  ],
+                ),
+              ),
+            )
+              );
   }
 
-  Card kategoriCardSolKolon(int degisken) {
-    return Card(
-      color: Colors.white,
+  Padding EnCokBakilanlar() {
+    return Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: Text(
+                    "En çok bakılanlar",
+                    textAlign: TextAlign.left, 
+                    style: TextStyle(color:Colors.red),
+                  )
+                ),
+              );
+  }
+
+  GridView GridMetodu() {
+    return GridView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      childAspectRatio: 0.7,
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 5,
+                      mainAxisSpacing: 20,
+                    ), 
+                    itemCount: 21,
+                    itemBuilder: (context, indexx){
+                      return kategoriCardSagTaraf(indexx);
+                    });
+  }
+
+  Padding seninIcinSectik() {
+    return Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: Text(
+                      "Senin için seçtik",
+                      textAlign: TextAlign.left, 
+                      style: TextStyle(color:Colors.red),
+                    )
+                  ),
+                );
+  }
+
+  Widget kategoriCardSagTaraf(int index2) {
+    return SizedBox(
       child: Column(
         children: [
+          Expanded(
+            child: InkWell(
+              onTap: (){print("buraya sayfa gelecek(iç)");},
+              child: SizedBox(
+                width: 80,
+                child: Card(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                  elevation: 10,
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Image.network("https://picsum.photos/id/$index2/40/60", fit: BoxFit.contain,),
+                  )
+                ),
+              ),
+            ),
+          ),
+          FittedBox(fit: BoxFit.fitWidth, child: Text("${sagkategorilerlistesiUst.elementAt(index2)}")),
+        ],
+      ),
+    );
+  }
+
+  SizedBox SoldakiAsagiKaydirilanSecenek() {
+    return SizedBox(
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Padding(
+                  padding: const EdgeInsets.all(18.0),
+                  child: Column(
+                    children: List.generate(10, (index) => InkWellMetodu(index))                    
+                  ),
+                ),
+              ),
+            );
+  }
+
+void sifirla(){
+  degisken=0;
+  index=-1;
+  index2=-1;
+}
+
+  InkWell solkolonInkWell() {
+    return InkWell(
+      child: Ink(child: solkolondegiskenarttirilmis()),
+      onTap: (){print("buraya ekran linki gelecek");},
+    );
+  }
+
+Widget InkWellMetodu(int inkIndex) {
+  return Card(
+    shape: RoundedRectangleBorder(
+      side: BorderSide(
+        color: inkIndex==selectedIndexSolTaraf? Colors.red: Colors.white, 
+        width: inkIndex==selectedIndexSolTaraf? 2:0),
+        borderRadius: BorderRadius.circular(12)
+    ),
+    elevation: 10,
+    child: InkWell(
+      onTap: (){
+        print("buraya sayfa gelecek");
+        setState(() {
+          selectedIndexSolTaraf=inkIndex;
+        });
+      },
+      child: Ink(
+        child: solkolondegiskenarttirilmis(),
+        width: 70,
+        height: 100,
+      ),
+    ),
+  );
+}
+
+
+
+  Widget solkolondegiskenarttirilmis() {
+    degisken++;
+    index++;
+    return kategoriCardSolKolon(degisken, index);
+  }
+
+  Widget kategoriCardSolKolon(int degisken, int index) {
+    return SizedBox(
+      child: Column(
+        children: [
+          Spacer(),
           Image.network("https://picsum.photos/id/$degisken/40/40"),
-          Text("data")
+          Spacer(),
+          Padding(
+            padding: const EdgeInsets.all(2.0),
+            child: FittedBox(fit: BoxFit.fitWidth, child: Text("${solkategorilerlistesi.elementAt(index)}")),
+          ),
+          Spacer(),
         ]
       )
     );
