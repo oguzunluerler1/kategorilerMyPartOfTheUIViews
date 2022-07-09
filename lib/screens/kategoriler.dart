@@ -178,7 +178,7 @@ class _kategoriViewState extends State<kategoriView> {
                     physics: NeverScrollableScrollPhysics(),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       childAspectRatio: 0.7,
-                      crossAxisCount: 2,
+                      crossAxisCount: 3,
                       crossAxisSpacing: 5,
                       mainAxisSpacing: 20,
                     ), 
