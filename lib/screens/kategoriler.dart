@@ -47,6 +47,29 @@ class _kategoriViewState extends State<kategoriView> {
     "Baharat",
     "Kupalar",
   ];
+  List<String> sagkategorilerlistesiAlt = [
+    "Android Telefonlar",
+    "Giyim",
+    "Kampçılık",
+    "PC malzemeleri",
+    "Sofra",
+    "Ayakkabı",
+    "Yemek",
+    "Saç bakım",
+    "Erkek ayakkabı",
+    "Cilt bakım",
+    "Oto aksesuar",
+    "Iphone",
+    "Süpürgeler",
+    "Gıda takviyeleri",
+    "Laptop",
+    "Makyaj",
+    "Hırdavat",
+    "Edebiyat",
+    "Pişirme",
+    "Kadın",
+    "Kablosuz kulaklık",
+  ];
   @override
   Widget build(BuildContext context) {
     sifirla();
@@ -125,9 +148,9 @@ class _kategoriViewState extends State<kategoriView> {
                 child: Column(
                   children: [
                     seninIcinSectik(),
-                    GridMetodu(),
+                    GridMetodu(sagkategorilerlistesiUst),
                     EnCokBakilanlar(),
-                    GridMetodu(),
+                    GridMetodu(sagkategorilerlistesiAlt),
                   ],
                 ),
               ),
@@ -149,7 +172,7 @@ class _kategoriViewState extends State<kategoriView> {
               );
   }
 
-  GridView GridMetodu() {
+  GridView GridMetodu(List<String> ilkGirenListe) {
     return GridView.builder(
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
@@ -161,7 +184,7 @@ class _kategoriViewState extends State<kategoriView> {
                     ), 
                     itemCount: 21,
                     itemBuilder: (context, indexx){
-                      return kategoriCardSagTaraf(indexx);
+                      return kategoriCardSagTaraf(indexx, ilkGirenListe);
                     });
   }
 
@@ -179,7 +202,7 @@ class _kategoriViewState extends State<kategoriView> {
                 );
   }
 
-  Widget kategoriCardSagTaraf(int index2) {
+  Widget kategoriCardSagTaraf(int index2, List<String> girenListe) {
     return SizedBox(
       child: Column(
         children: [
@@ -199,7 +222,7 @@ class _kategoriViewState extends State<kategoriView> {
               ),
             ),
           ),
-          FittedBox(fit: BoxFit.fitWidth, child: Text("${sagkategorilerlistesiUst.elementAt(index2)}")),
+          FittedBox(fit: BoxFit.fitWidth, child: Text("${girenListe.elementAt(index2)}")),
         ],
       ),
     );
