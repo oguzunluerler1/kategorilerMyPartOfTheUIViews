@@ -28,41 +28,31 @@ class _siparislerViewState extends State<siparislerView> {
           ),
         ],
       ),
-      body: bodyMethod(),
+      body: bodyMethod(), 
     );
   }
 
   Widget bodyMethod() {
-    return SizedBox(
-      child: Expanded(
-        child: Column(
-          children: [
-            ustSiparisTalepSecimMetodu(),
-            SingleChildScrollView(
-              child: Expanded(
-                child: Column(
-                  children: [
-                    Column(
-                      children: [ 
-                        Column(
-                          children: [
-                            gestureDetectorIcKutuFull(),
-                            gestureDetectorIcKutuFull(),
-                            gestureDetectorIcKutuFull(),
-                            gestureDetectorIcKutuFull(),
-                            gestureDetectorIcKutuFull(),
-                            gestureDetectorIcKutuFull(),
-                          ],
-                        )
-                      ],
-                    )
-                  ],
-                ),
+    return Column(
+      children: [
+        ustSiparisTalepSecimMetodu(),
+        Expanded(
+          child: SingleChildScrollView(
+            child: Expanded(
+              child: Column(
+                children: [
+                  gestureDetectorIcKutuFull(),
+                  gestureDetectorIcKutuFull(),
+                  gestureDetectorIcKutuFull(),
+                  gestureDetectorIcKutuFull(),
+                  gestureDetectorIcKutuFull(),
+                  gestureDetectorIcKutuFull(),
+                ],
               ),
             ),
-          ],
+          ),
         ),
-      ),
+      ],
     );
   }
 
