@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class siparislerView extends StatefulWidget {
   const siparislerView({Key? key}) : super(key: key);
@@ -10,6 +8,7 @@ class siparislerView extends StatefulWidget {
 }
 
 class _siparislerViewState extends State<siparislerView> {
+  bool onTapDegiskeni=false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,8 +41,19 @@ class _siparislerViewState extends State<siparislerView> {
               child: SizedBox(
                 height: 50,
                 width: double.infinity,
-                child: Container(
-                  child: Center(child: Text("Siparişlerim", textAlign: TextAlign.center, style: TextStyle(fontSize: 17),)),
+                child: GestureDetector(
+                  onTap: () {
+                    print("sipariş ekranına yönlendir");
+                    setState(() {
+                      onTapDegiskeni = false;
+                    });
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(border: Border(
+                      bottom: BorderSide(width: onTapDegiskeni == false? 2 :0, color: Colors.black,),
+                    )),
+                    child: Center(child: Text("Siparişlerim", textAlign: TextAlign.center, style: TextStyle(fontSize: 17, fontWeight: onTapDegiskeni==false? FontWeight.bold :FontWeight.normal),)),
+                  ),
                 ),
               )
             ),           
@@ -51,11 +61,22 @@ class _siparislerViewState extends State<siparislerView> {
               child: SizedBox(
                 height: 50,
                 width: double.infinity,
-                child: Container(
-                  child: Center(child: Text("Taleplerim", textAlign: TextAlign.center, style: TextStyle(fontSize: 17),)),
+                child: GestureDetector(   
+                  child: Container(
+                    decoration: BoxDecoration(border: Border(
+                      bottom: BorderSide(width: onTapDegiskeni == true? 2 :0, color: Colors.black,),
+                    )),
+                    child: Center(child: Text("Taleplerim", textAlign: TextAlign.center, style: TextStyle(fontSize: 17, fontWeight: onTapDegiskeni==true? FontWeight.bold :FontWeight.normal),)),
+                  ),
+                  onTap: () {
+                    print("taleplerim ekranına yönlendir");
+                    setState(() {
+                      onTapDegiskeni = true;
+                    });
+                  },
                 ),
               )
-            ),
+            ),  
           ],
         )
       ],
