@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:oguz_views/screens/kategoriler.dart';
 import 'package:oguz_views/screens/siparislerim.dart';
 
 void main() => runApp(MyApp());

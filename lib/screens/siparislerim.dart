@@ -33,53 +33,213 @@ class _siparislerViewState extends State<siparislerView> {
   }
 
   Widget bodyMethod() {
-    return Column(
-      children: [
-        Row(
+    return SizedBox(
+      child: Expanded(
+        child: Column(
           children: [
-            Expanded(
-              child: SizedBox(
-                height: 50,
-                width: double.infinity,
-                child: GestureDetector(
-                  onTap: () {
-                    print("sipariş ekranına yönlendir");
-                    setState(() {
-                      onTapDegiskeni = false;
-                    });
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(border: Border(
-                      bottom: BorderSide(width: onTapDegiskeni == false? 2 :0, color: Colors.black,),
-                    )),
-                    child: Center(child: Text("Siparişlerim", textAlign: TextAlign.center, style: TextStyle(fontSize: 17, fontWeight: onTapDegiskeni==false? FontWeight.bold :FontWeight.normal),)),
-                  ),
+            ustSiparisTalepSecimMetodu(),
+            SingleChildScrollView(
+              child: Expanded(
+                child: Column(
+                  children: [
+                    Column(
+                      children: [ 
+                        Column(
+                          children: [
+                            gestureDetectorIcKutuFull(),
+                            gestureDetectorIcKutuFull(),
+                            gestureDetectorIcKutuFull(),
+                            gestureDetectorIcKutuFull(),
+                            gestureDetectorIcKutuFull(),
+                            gestureDetectorIcKutuFull(),
+                          ],
+                        )
+                      ],
+                    )
+                  ],
                 ),
-              )
-            ),           
-            Expanded(
-              child: SizedBox(
-                height: 50,
-                width: double.infinity,
-                child: GestureDetector(   
-                  child: Container(
-                    decoration: BoxDecoration(border: Border(
-                      bottom: BorderSide(width: onTapDegiskeni == true? 2 :0, color: Colors.black,),
-                    )),
-                    child: Center(child: Text("Taleplerim", textAlign: TextAlign.center, style: TextStyle(fontSize: 17, fontWeight: onTapDegiskeni==true? FontWeight.bold :FontWeight.normal),)),
-                  ),
-                  onTap: () {
-                    print("taleplerim ekranına yönlendir");
-                    setState(() {
-                      onTapDegiskeni = true;
-                    });
-                  },
-                ),
-              )
-            ),  
+              ),
+            ),
           ],
-        )
-      ],
+        ),
+      ),
     );
+  }
+
+  Widget gestureDetectorIcKutuFull() {
+    return SizedBox(width: double.infinity, height: 180,
+                  child: IcKutuFull(),
+                  );
+  }
+
+  Column IcKutuFull() {
+    return Column(
+                    children: [
+                      IcKutuUst(),
+                      IcKutuAlt()
+                    ],
+                  );
+  }
+
+  Container IcKutuAlt() {
+    return Container(width: double.infinity, height: 100, color: Colors.white,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Card(
+                          elevation: 10,
+                          child: IcKutuAltBolgeIci(),
+                        ),
+                      ), 
+                    );
+  }
+
+  Widget IcKutuAltBolgeIci() {
+    return Container(
+      child: GestureDetector(
+        onTap: (){
+          print("Sipariş detayı ekranına gidilecek");
+        },
+        child: Column(
+          children: [
+            Container(
+              child: SizedBox(
+                width: double.infinity,
+                height: 50,
+                child: Row(
+                  children: [
+                    Spacer(),
+                    Center(child: CircleAvatarMetodu()),
+                    Spacer(),
+                    Container(
+                      child: Column(
+                        children: [
+                          Spacer(),
+                          Text("6 Haziran"),
+                          Spacer(),
+                          Text("Pts, 10:40"),
+                          Spacer(),
+                        ],
+                      ),
+                    ),
+                    Spacer(),
+                    Row(
+                      children: [
+                        Container(
+                          child: Column(
+                            children: [
+                              Spacer(),
+                              Text("179,00 TL",style: TextStyle(color: Colors.green.shade900),),
+                              Spacer(),
+                              Text("Hepsipay Cüzdanım"),
+                              Spacer(),
+                            ],
+                          ),
+                        ),
+                        Icon(Icons.arrow_forward_ios_rounded)
+                      ],
+                    ),
+                    Spacer(),
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 15.0),
+              child: Row(
+                children: [
+                  Icon(Icons.done),
+                  SizedBox(width: 4,),
+                  Text("Sipariş tamamlandı"),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+        height: 90,
+        width: 50,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(width: 0.5),
+        ),
+    );
+  }
+
+  Container IcKutuUst() {
+    return Container(
+      width: double.infinity, 
+      height: 80, 
+      color: Colors.blue.shade200, 
+      child: Padding(
+        padding: const EdgeInsets.all(25),
+        child: Center(
+          child: Row(
+            children: [
+              Column(
+                children: [
+                  Spacer(),
+                  Text("Haziran", style: TextStyle(fontSize: 25, color: Colors.purple),),
+                  Spacer(),
+                ],
+              ), 
+              Spacer(),
+              Icon(Icons.sunny)
+            ],
+          ),
+        ),
+      ),
+    
+    );
+  }
+
+  CircleAvatar CircleAvatarMetodu() {
+    return CircleAvatar(backgroundImage: NetworkImage("https://productimages.hepsiburada.net/s/10/500/9198908342322.jpg"));
+  }
+
+  Row ustSiparisTalepSecimMetodu() {
+    return Row(
+        children: [
+          Expanded(
+            child: SizedBox(
+              height: 50,
+              width: double.infinity,
+              child: GestureDetector(
+                onTap: () {
+                  print("sipariş ekranına yönlendir");
+                  setState(() {
+                    onTapDegiskeni = false;
+                  });
+                },
+                child: Container(
+                  decoration: BoxDecoration(border: Border(
+                    bottom: BorderSide(width: onTapDegiskeni == false? 2 :0, color: Colors.black,),
+                  )),
+                  child: Center(child: Text("Siparişlerim", textAlign: TextAlign.center, style: TextStyle(fontSize: 17, fontWeight: onTapDegiskeni==false? FontWeight.bold :FontWeight.normal),)),
+                ),
+              ),
+            )
+          ),           
+          Expanded(
+            child: SizedBox(
+              height: 50,
+              width: double.infinity,
+              child: GestureDetector(   
+                child: Container(
+                  decoration: BoxDecoration(border: Border(
+                    bottom: BorderSide(width: onTapDegiskeni == true? 2 :0, color: Colors.black,),
+                  )),
+                  child: Center(child: Text("Taleplerim", textAlign: TextAlign.center, style: TextStyle(fontSize: 17, fontWeight: onTapDegiskeni==true? FontWeight.bold :FontWeight.normal),)),
+                ),
+                onTap: () {
+                  print("taleplerim ekranına yönlendir");
+                  setState(() {
+                    onTapDegiskeni = true;
+                  });
+                },
+              ),
+            )
+          ),  
+        ],
+      );
   }
 }
