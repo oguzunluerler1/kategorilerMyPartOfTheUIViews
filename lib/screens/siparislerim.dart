@@ -20,9 +20,9 @@ class _siparislerViewState extends State<siparislerView> {
           GestureDetector(
             onTap: (){
               print("profil ekranına götürülecek");
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(15.0),
+            }, 
+            child: Padding( 
+              padding: const EdgeInsets.all(15.0), 
               child: Icon(Icons.person, color: Colors.purple),
             ),
           ),
