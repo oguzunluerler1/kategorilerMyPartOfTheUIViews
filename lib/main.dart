@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:oguz_views/screens/siparislerim.dart';
+import 'package:oguz_views/screens/kullanicisepet.dart';
 
 void main() => runApp(MyApp());
 
@@ -8,7 +8,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Material App',
-      home: siparislerView()
+      home: sepetim(),
     );
   }
 }
