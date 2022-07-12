@@ -37,15 +37,27 @@ class _kayitliKartViewState extends State<kayitliKartView> {
             padding: const EdgeInsets.all(8.0),
             child: Text("Kayıtlı Kartlarım ($kayitlikartsayisi)", style: TextStyle(color: Colors.red, fontSize: 30),),
           ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                kart1(),
-                kart2(),
-                kart3(),
-              ],
-            ),
+          Column(
+            children: [
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    kart1(),
+                    kart2(),
+                    kart3(),
+                  ],
+                ),
+              ),
+              Row(
+                children: [
+                  IconButton(onPressed: (){
+                    (print("Adres ekleme ekranına geçilecek"));
+                  }, icon: Icon(Icons.add)),
+                  GestureDetector(onTap: (){(print("Adres ekleme ekranına geçilecek"));},child: Text("Adres Ekle"))
+                ],
+              ),
+            ],
           )
         ],
       ),
