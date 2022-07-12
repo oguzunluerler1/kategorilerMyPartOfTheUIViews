@@ -63,6 +63,13 @@ flutter:
     - assets/canta.jpg
     - assets/kartlogolar/akbank.png
     - assets/kartlogolar/axess.jpg
+    - assets/kartlogolar/visa.jpg
+    - assets/kartlogolar/chip.jpg
+    - assets/kartlogolar/iş.png
+    - assets/kartlogolar/maximum.png
+    - assets/kartlogolar/mastercard.png
+    - assets/kartlogolar/ziraat.png
+    - assets/kartlogolar/bankkart.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

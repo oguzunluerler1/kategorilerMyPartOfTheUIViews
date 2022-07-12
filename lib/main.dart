@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:oguz_views/screens/kayitlikartlarim.dart';
-import 'package:oguz_views/screens/kullanicisepet.dart';
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
