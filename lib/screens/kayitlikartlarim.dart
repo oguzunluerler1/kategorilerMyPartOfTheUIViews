@@ -1,6 +1,7 @@
+
+
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 
 class kayitliKartView extends StatefulWidget {
   const kayitliKartView({Key? key}) : super(key: key);
@@ -11,6 +12,9 @@ class kayitliKartView extends StatefulWidget {
 
 class _kayitliKartViewState extends State<kayitliKartView> {
   int kayitlikartsayisi = 3;
+  int kayit1 = 1;
+  int kayit2 = 1;
+  int kayit3 = 1;
   bool kart1bool = true;
   bool kart2bool = true;
   bool kart3bool = true;
@@ -65,7 +69,6 @@ class _kayitliKartViewState extends State<kayitliKartView> {
   }
 
   Widget kart2() {
-    kayitlikartsayisi++;
     return Visibility(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -87,7 +90,6 @@ class _kayitliKartViewState extends State<kayitliKartView> {
   }
 
   Widget kart3() {
-    kayitlikartsayisi++;
     return Visibility(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -109,7 +111,6 @@ class _kayitliKartViewState extends State<kayitliKartView> {
   }
 
   Widget kart1() {
-    kayitlikartsayisi++;
     return Visibility(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -144,7 +145,7 @@ class _kayitliKartViewState extends State<kayitliKartView> {
             Spacer(),
             GestureDetector(onTap: (){setState(() {
               kart1bool = false;
-              kayitlikartsayisi--;
+              kayitlikartsayisi=kayitlikartsayisi-1;
             });},child: Icon(Icons.delete))
           ],
         ),
@@ -192,6 +193,7 @@ class _kayitliKartViewState extends State<kayitliKartView> {
             Spacer(),
             GestureDetector(onTap: (){setState(() {
               kart2bool = false;
+              kayitlikartsayisi=kayitlikartsayisi-kayit2;
             });},child: Icon(Icons.delete))
           ],
         ),
@@ -241,7 +243,7 @@ class _kayitliKartViewState extends State<kayitliKartView> {
             Spacer(),
             GestureDetector(onTap: (){setState(() {
               kart3bool = false;
-              kayitlikartsayisi--;
+              kayitlikartsayisi=kayitlikartsayisi-kayit1;
             });},child: Icon(Icons.delete))
           ],
         ),
