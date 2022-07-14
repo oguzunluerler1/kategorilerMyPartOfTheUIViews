@@ -120,7 +120,7 @@ class _kartEklemeViewState extends State<kartEklemeView> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
+                                    Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: Text("Kart üzerindeki isim"),
                   ),
