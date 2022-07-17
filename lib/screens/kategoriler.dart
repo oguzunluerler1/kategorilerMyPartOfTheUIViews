@@ -74,7 +74,7 @@ class _kategoriViewState extends State<kategoriView> {
   Widget build(BuildContext context) {
     sifirla();
     return SafeArea(
-      child: Scaffold( 
+      child: Scaffold(
         body: bodyMethod(),
       ),
     );
@@ -105,8 +105,11 @@ class _kategoriViewState extends State<kategoriView> {
                   border: InputBorder.none,
                   hintText: "Ürün, kategori veya marka ara",
                   prefixIcon: 
-                    Icon(
-                      Icons.search,
+                    GestureDetector(
+                      onTap:() {print("arama yapılacak");},
+                      child: Icon(
+                        Icons.search,
+                      ),
                     ),
                   suffixIcon: 
                     GestureDetector(
@@ -304,5 +307,7 @@ Widget InkWellMetodu(int inkIndex) {
       )
     );
   }
+
+
 
 }
