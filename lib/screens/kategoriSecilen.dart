@@ -18,6 +18,7 @@ class _secilmisKategoriScreenState extends State<secilmisKategoriScreen> {
     {"min":200, "max":999999999},
   ];  
   int secilmisFiyatOpt = 0;
+  List<Urun> filtreList = [];
   List <Urun> urunListesi = [];
   int selectedValuePop = 1;
   bool isChecked = false;
@@ -107,7 +108,7 @@ class _secilmisKategoriScreenState extends State<secilmisKategoriScreen> {
   Expanded urunResimleri(int index) {
     return Expanded(flex: 5,child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text("resim")//Image.network("https://picsum.photos/150/100?random=$index",fit: BoxFit.cover,),
+                child: Image.network("https://picsum.photos/150/100?random=$index",fit: BoxFit.cover,),
               ));
   }
 
@@ -118,26 +119,28 @@ class _secilmisKategoriScreenState extends State<secilmisKategoriScreen> {
               ),);
   }
 
-  Row puanlamalarDegerlendirmesayisi(Urun urun) {
-    return Row(
-                children: [
-                  Row(
-                    children: List.generate(5, (index) {
-                      return Icon(
-                        index+1 < urun.puanOrt ?
-                        Icons.star
-                        : Icons.star_border
-                      );
-
-
-                    })
-                  ),
-                  Text("(100)") //TODO: Degerlendirme sayısı eklenecek
-                ],
-              );
+  Widget puanlamalarDegerlendirmesayisi(Urun urun) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 8.0),
+      child: Row(
+                  children: [
+                    Text("${urun.puanOrt} "),
+                    Row(
+                      children: List.generate(5, (index) {
+                        return Icon(
+                          index+1 < urun.puanOrt ?
+                          Icons.star
+                          : Icons.star_border,
+                          size: 18,
+                        );
+                      })
+                    ),
+                    Expanded(flex:2,child: Text("(100)")), //TODO: Degerlendirme sayısı eklenecek
+                    Spacer(),
+                  ],
+                ),
+    );
   }
-
-
 
   poplama () {
     showModalBottomSheet(context: context, builder: (context){
@@ -285,8 +288,6 @@ class _secilmisKategoriScreenState extends State<secilmisKategoriScreen> {
 
   Widget shareButonu() => Icon(Icons.ios_share);
 
-  List<Urun> filtreList = [];
-
   filtre() {
     showModalBottomSheet(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
@@ -309,12 +310,12 @@ class _secilmisKategoriScreenState extends State<secilmisKategoriScreen> {
                 Spacer(flex: 3,),
                 ElevatedButton  (onPressed: (){
                   if (markaSecilenler.isNotEmpty){
-                    filtreList = tempUrunListesi.where((element) => markaSecilenler.contains(element.marka)).toList();
+                    filtreList = tempUrunListesi.where((e) => markaSecilenler.contains(e.marka)).toList();
                   }  
                   else {
                     filtreList = tempUrunListesi;
                   }               
-                  urunListesi = filtreList.where((element) => element.fiyat >= filtreFiyatListesi[secilmisFiyatOpt]["min"] && element.fiyat <= filtreFiyatListesi[secilmisFiyatOpt]["max"]).toList();
+                  urunListesi = filtreList.where((e) => e.fiyat >= filtreFiyatListesi[secilmisFiyatOpt]["min"] && e.fiyat <= filtreFiyatListesi[secilmisFiyatOpt]["max"]).toList();
                   setState((){ });
                   Navigator.pop(context);
                 }, child: Text("Filtreleri Uygula")),
@@ -327,9 +328,6 @@ class _secilmisKategoriScreenState extends State<secilmisKategoriScreen> {
   }
 
   void fiyatDialog () {
-    var selectedf = filtreFiyatListesi[secilmisFiyatOpt];
-    print(selectedf["min"]);
-    print(selectedf["max"]);
     showDialog(
       context: context, 
       builder: (context) {
@@ -358,8 +356,7 @@ class _secilmisKategoriScreenState extends State<secilmisKategoriScreen> {
                 }, child: Text("50 - 100 TL arası", style: TextStyle(color: secilmisFiyatOpt==2 ? Colors.green : null),)),
                 secilmisFiyatOpt == 2? Icon(Icons.done) : SizedBox.shrink()
               ],
-            ),
-            
+            ),      
             Row(
               children: [
                 TextButton(onPressed: (){
@@ -386,7 +383,6 @@ class _secilmisKategoriScreenState extends State<secilmisKategoriScreen> {
             TextButton(onPressed: (){
               Navigator.pop(context);
               secilmisFiyatOpt = 0;setState(() {
-                
               });
             }, child: Text("Filtreyi kaldır")),
           ],
@@ -396,10 +392,6 @@ class _secilmisKategoriScreenState extends State<secilmisKategoriScreen> {
     );
   }
   
-  void puanDialog () {
-
-  }
-
   void markaDialog () {
     var markalar = tempUrunListesi.map((e) => e.marka).toSet().toList();
     showDialog(
